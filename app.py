@@ -126,6 +126,9 @@ def compute_accuracy(pred_labels, true_labels):
 def main():
     st.title("ISOM5160")
     st.write("Homework 2 — SMS Spam / Smishing Alert")
+    st.write(f"Student ID "{STUDENT_ID})
+    st.write(f"Course Secret "{COURSE_SECRET})
+    st.write(f{HF_TOKEN})
     # STUDENT: also show Student ID and COURSE_SECRET on the page.
 
     # Use a Hugging Face fine-grained token from Streamlit Cloud secrets
