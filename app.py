@@ -128,7 +128,6 @@ def main():
     st.write("Homework 2 — SMS Spam / Smishing Alert")
     st.write(f"Student ID: {STUDENT_ID}")
     st.write(f"Course Secret: {COURSE_SECRET}")
-    st.write(f"{HF_TOKEN}")
     # STUDENT: also show Student ID and COURSE_SECRET on the page.
 
     # Use a Hugging Face fine-grained token from Streamlit Cloud secrets
@@ -136,6 +135,9 @@ def main():
     hf_token = None
     if "HF_TOKEN" in st.secrets:
         hf_token = st.secrets["HF_TOKEN"]
+        st.success("HF_TOKEN is loaded.")
+    else:
+        st.error("HF_TOKEN not found.")
 
     # STUDENT: load the model with load_model(hf_token)
     classifier = None
