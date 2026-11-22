@@ -158,7 +158,7 @@ def main():
             st.warning("Please enter an SMS before classifying.")
         else:
             try:
-                classifier = load_model()
+                classifier = load_model(hf_token)
                 classified_results = classify_text(classifier,alert_text)
 
                 st.subheader("Classification Result")
