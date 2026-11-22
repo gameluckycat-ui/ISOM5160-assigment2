@@ -123,7 +123,15 @@ def classify_text(classifier, text):
 def compute_accuracy(pred_labels, true_labels):
     """Return accuracy as a float between 0 and 1."""
     # STUDENT: accuracy = (number of matches) / (number of samples).
-    accuracy = None  # STUDENT: replace this
+    if len(pred_labels) == 0:
+        return 0
+
+    matches = 0
+    for i in range(len(pred_labels)):
+        if pred_labels[i] == true_labels[i]:
+            matches += 1
+
+    accuracy = matches / len(pred_labels)  # STUDENT: replace this
     return accuracy
 
 def shorten_text(text):
@@ -193,18 +201,26 @@ def main():
         sample_text, ground_truth = load_test_samples()
 
         print_rows = []
-        for idx in range(0,99):
+        pred_labels = []
+        true_lables = []
+
+        for idx in range(len(sample_text)):
 
             text = sample_text[idx]
             gt_label = map_label(ground_truth[idx])
             pred_label, conf_score = classify_text(classifier, text)
+
+            #save labels for compute accuracy
+            true_lables.append(gt_label)
+            pred_labels.append(pred_label)
+
             if pred_label == gt_label:
                 is_match = "Y"
             else:
                 is_match = "N"
 
             print_rows.append({
-                "ID": idx,
+                "#": idx,
                 "Text (short)": shorten_text(text),
                 "Ground truth": gt_label,
                 "Prediction": pred_label,
@@ -212,8 +228,12 @@ def main():
                 "Match": is_match,
             })
 
+        # Compute Accuracy
+        accuracy = compute_accuracy(pred_labels, true_lables)
+        st.metric("Accuracy", f"{accuracy:.2%}")
+
         df = pd.DataFrame(print_rows)
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(df, width="stretch")
 
 
 if __name__ == "__main__":
