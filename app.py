@@ -152,9 +152,10 @@ def main():
     )
 
     if st.button("Classify SMS"):
-        # STUDENT: if the text box is not empty, call classify_text,
-        # then show the display label and the confidence.
-        pass
+        if not alert_text.strip():
+            st.warning("Please enter an SMS before classifying.")
+        else:
+            classify_text()
 
     st.subheader("Test on 100 Hugging Face samples")
     st.write(
