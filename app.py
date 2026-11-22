@@ -182,7 +182,6 @@ def main():
             try:
                 label, score = classify_text(classifier,alert_text)
 
-                st.subheader("Classification Result")
                 col1, col2 = st.columns(2)
 
                 col1.metric("Predicted Label", label)
@@ -233,8 +232,7 @@ def main():
 
         # Compute Accuracy
         accuracy = compute_accuracy(pred_labels, true_lables)
-        st.subheader("Classification Accuracy")
-        st.write(f"{accuracy:.2%}")
+        st.metric("Accuracy", f"{accuracy:.2%}")
 
         df = pd.DataFrame(print_rows)
         st.dataframe(df, width="stretch", hide_index=True)
