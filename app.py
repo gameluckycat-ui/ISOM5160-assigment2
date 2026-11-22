@@ -167,7 +167,7 @@ def main():
                 col2.metric("Confidence Score", f"{classified_results.score:.2%}")
 
             except Exception as e:
-            st.error(f"Error running classification: {e}")
+                st.error(f"Error running classification: {e}")
 
     st.subheader("Test on 100 Hugging Face samples")
     st.write(
