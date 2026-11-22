@@ -31,7 +31,7 @@ SECRET PHRASE (must appear on the app page): ISOM5160-HW2-SMS
 #
 # GenAI acknowledgment (required if you used GenAI; otherwise write "None"):
 #   - Tools used: Gemini
-#   - How you used them: Debug syntax error
+#   - How you used them: Debug syntax error, suggest functions to finish what I want to do
 #
 # Q1. Who is the primary business user of this app?
 #     (one short sentence; e.g., an employee or a security analyst reviewing
@@ -126,9 +126,11 @@ def compute_accuracy(pred_labels, true_labels):
     accuracy = None  # STUDENT: replace this
     return accuracy
 
-def shorten_text(text, max_words=6):
-    """Limit text to the first few words."""
+def shorten_text(text):
+    """Shorten message to first few words."""
     words = str(text).split()
+    max_words = 5
+
     if len(words) <= max_words:
         return " ".join(words)
     return " ".join(words[:max_words]) + "..."
@@ -151,6 +153,7 @@ def main():
 
     # STUDENT: load the model with load_model(hf_token)
     classifier = None
+    classifier = load_model(hf_token)
 
     alert_text = st.text_area(
         "SMS message",
@@ -166,7 +169,6 @@ def main():
             st.warning("Please enter an SMS before classifying.")
         else:
             try:
-                classifier = load_model(hf_token)
                 label, score = classify_text(classifier,alert_text)
 
                 st.subheader("Classification Result")
@@ -191,15 +193,17 @@ def main():
         sample_text, ground_truth = load_test_samples()
 
         print_rows = []
-        for idx, (text, raw_gt) in enumerate(zip(sample_text, ground_truth), start=1):
-            gt = map_label(raw_gt)
+        for idx in range(1,100):
+
+            text = sample_text[idx]
+            gt_label = map_label(ground_truth[idx])
             #pred, conf = classify_text(classifier, text)
             #is_match = "Y" if pred == gt else "N"
 
             print_rows.append({
                 "ID": idx,
-                "Text (short)": shorten_text(text, max_words=6),
-                "Ground truth": gt,
+                "Text (short)": shorten_text(text),
+                "Ground truth": gt_label,
 #            "Prediction": pred,
  #           "Confidence": f"{conf:.2%}",
   #          "Match": is_match,
