@@ -165,12 +165,14 @@ def main():
                 st.subheader("Classification Result")
                 col1, col2 = st.columns(2)
 
-                if label == "spam":
-                    col1.error("Predicted Label: SPAM")
-                elif label == "legitimate":
-                    col1.success("Predicted Label: LEGITIMATE")
-                else:
-                    col1.info(f"Predicted Label: {label}")
+            with col1:
+                st.caption("Predicted Label")
+            if label == "spam":
+                st.markdown("### :red[SPAM]")
+            elif label == "legitimate":
+                st.markdown("### :green[LEGITIMATE]")
+            else:
+                st.markdown(f"### {label}")
                 
                 col2.metric("Confidence Score", f"{score:.2%}")
 
