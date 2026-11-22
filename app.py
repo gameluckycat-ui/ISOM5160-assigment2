@@ -30,8 +30,8 @@ SECRET PHRASE (must appear on the app page): ISOM5160-HW2-SMS
 # Student ID: 21387621
 #
 # GenAI acknowledgment (required if you used GenAI; otherwise write "None"):
-#   - Tools used: None
-#   - How you used them: None
+#   - Tools used: Gemini
+#   - How you used them: Debug syntax error
 #
 # Q1. Who is the primary business user of this app?
 #     (one short sentence; e.g., an employee or a security analyst reviewing
@@ -126,9 +126,9 @@ def compute_accuracy(pred_labels, true_labels):
 def main():
     st.title("ISOM5160")
     st.write("Homework 2 — SMS Spam / Smishing Alert")
-    st.write(f"Student ID "{STUDENT_ID})
-    st.write(f"Course Secret "{COURSE_SECRET})
-    st.write(f{HF_TOKEN})
+    st.write(f"Student ID: {STUDENT_ID}")
+    st.write(f"Course Secret: {COURSE_SECRET}")
+    st.write(f"{HF_TOKEN}")
     # STUDENT: also show Student ID and COURSE_SECRET on the page.
 
     # Use a Hugging Face fine-grained token from Streamlit Cloud secrets
