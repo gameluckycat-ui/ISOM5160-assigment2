@@ -111,8 +111,10 @@ def classify_text(classifier, text):
     """Return (display_label, confidence) for one SMS string."""
     # STUDENT: call the pipeline on this one text, map the raw label with
     # map_label(...), and return the display label and the confidence score.
-    display_label = None  # STUDENT: replace this
-    score = None  # STUDENT: replace this
+    result = classifier(text)[0]
+
+    display_label = result["label"]  # STUDENT: replace this
+    score = result["score"]  # STUDENT: replace this
     return display_label, score
 
 
@@ -155,7 +157,17 @@ def main():
         if not alert_text.strip():
             st.warning("Please enter an SMS before classifying.")
         else:
-            classify_text()
+            try:
+                classifier = load_model()
+                classified_results = classify_text(classifier,alert_text)
+
+                st.subheader("Classification Result")
+                col1, col2 = st.columns(2)
+                col1.metric("Predicted Label", classified_results.display_label)
+                col2.metric("Confidence Score", f"{classified_results.score:.2%}")
+
+            except Exception as e:
+            st.error(f"Error running classification: {e}")
 
     st.subheader("Test on 100 Hugging Face samples")
     st.write(
