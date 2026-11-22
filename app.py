@@ -197,16 +197,19 @@ def main():
 
             text = sample_text[idx]
             gt_label = map_label(ground_truth[idx])
-            pred, conf = classify_text(classifier, text)
-            #is_match = "Y" if pred == gt else "N"
+            pred_label, conf_score = classify_text(classifier, text)
+            if pred_label == gt_label:
+                is_match = "Y"
+            else:
+                is_match = "N"
 
             print_rows.append({
                 "ID": idx,
                 "Text (short)": shorten_text(text),
                 "Ground truth": gt_label,
-                "Prediction": pred,
-                "Confidence": f"{conf:.2%}",
-  #          "Match": is_match,
+                "Prediction": pred_label,
+                "Confidence": f"{conf_score:.2%}",
+                "Match": is_match,
             })
 
         df = pd.DataFrame(print_rows)
