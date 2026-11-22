@@ -44,7 +44,10 @@ SECRET PHRASE (must appear on the app page): ISOM5160-HW2-SMS
 #     YOUR app run. Comment on the cost of a false positive (blocking a
 #     legitimate SMS, such as a bank or one-time code message) versus a
 #     false negative (missing a spam or scam-like message).
-#   YOUR_ANSWER: 
+#   YOUR_ANSWER: 99% accuracy basically enough to block most of the spam messages. From the results, one false negative and zero
+#                false positive are acceptable for 100 samples. But for real business, 100 samples are too little to determine a 
+#                model accuracy. 
+#                
 #
 # =============================================================================
 
@@ -230,10 +233,11 @@ def main():
 
         # Compute Accuracy
         accuracy = compute_accuracy(pred_labels, true_lables)
-        st.metric("Accuracy", f"{accuracy:.2%}")
+        st.subheader("Classification Accuracy")
+        st.metric(f"{accuracy:.2%}")
 
         df = pd.DataFrame(print_rows)
-        st.dataframe(df, width="stretch")
+        st.dataframe(df, width="stretch", hide_index=True)
 
 
 if __name__ == "__main__":
