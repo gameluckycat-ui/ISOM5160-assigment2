@@ -159,12 +159,12 @@ def main():
         else:
             try:
                 classifier = load_model(hf_token)
-                classified_results = classify_text(classifier,alert_text)
+                label, score = classify_text(classifier,alert_text)
 
                 st.subheader("Classification Result")
                 col1, col2 = st.columns(2)
-                col1.metric("Predicted Label", classified_results.display_label)
-                col2.metric("Confidence Score", f"{classified_results.score:.2%}")
+                col1.metric("Predicted Label", label)
+                col2.metric("Confidence Score", f"{score:.2%}")
 
             except Exception as e:
                 st.error(f"Error running classification: {e}")
