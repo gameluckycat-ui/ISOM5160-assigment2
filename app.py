@@ -193,19 +193,19 @@ def main():
         sample_text, ground_truth = load_test_samples()
 
         print_rows = []
-        for idx in range(1,100):
+        for idx in range(0,99):
 
             text = sample_text[idx]
             gt_label = map_label(ground_truth[idx])
-            #pred, conf = classify_text(classifier, text)
+            pred, conf = classify_text(classifier, text)
             #is_match = "Y" if pred == gt else "N"
 
             print_rows.append({
                 "ID": idx,
                 "Text (short)": shorten_text(text),
                 "Ground truth": gt_label,
-#            "Prediction": pred,
- #           "Confidence": f"{conf:.2%}",
+                "Prediction": pred,
+                "Confidence": f"{conf:.2%}",
   #          "Match": is_match,
             })
 
