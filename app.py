@@ -164,7 +164,14 @@ def main():
 
                 st.subheader("Classification Result")
                 col1, col2 = st.columns(2)
-                col1.metric("Predicted Label", label)
+
+                if label == "spam":
+                    col1.error("Predicted Label: SPAM")
+                elif label == "legitimate":
+                    col1.success("Predicted Label: LEGITIMATE")
+                else:
+                    col1.info(f"Predicted Label: {label}")
+                
                 col2.metric("Confidence Score", f"{score:.2%}")
 
             except Exception as e:
