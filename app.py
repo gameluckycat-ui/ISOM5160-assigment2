@@ -113,7 +113,8 @@ def classify_text(classifier, text):
     # map_label(...), and return the display label and the confidence score.
     result = classifier(text)[0]
 
-    display_label = result["label"]  # STUDENT: replace this
+
+    display_label = map_label[result["label"]]  # STUDENT: replace this
     score = result["score"]  # STUDENT: replace this
     return display_label, score
 
