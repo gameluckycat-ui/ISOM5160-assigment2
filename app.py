@@ -234,7 +234,7 @@ def main():
         # Compute Accuracy
         accuracy = compute_accuracy(pred_labels, true_lables)
         st.subheader("Classification Accuracy")
-        st.metric(f"{accuracy:.2%}")
+        st.write(f"{accuracy:.2%}")
 
         df = pd.DataFrame(print_rows)
         st.dataframe(df, width="stretch", hide_index=True)
