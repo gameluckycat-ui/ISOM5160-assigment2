@@ -193,17 +193,18 @@ def main():
         print_rows = []
         for idx, (text, raw_gt) in enumerate(zip(sample_text, ground_truth), start=1):
             gt = map_label(raw_gt)
-            pred, conf = classify_text(classifier, text)
-            is_match = "Y" if pred == gt else "N"
+            #pred, conf = classify_text(classifier, text)
+            #is_match = "Y" if pred == gt else "N"
 
-        print_rows.append({
-            "ID": idx,
-            "Text (short)": shorten_text(text, max_words=6),
-            "Ground truth": gt,
-            "Prediction": pred,
-            "Confidence": f"{conf:.2%}",
-            "Match": is_match,
-    })
+            print_rows.append({
+                "ID": idx,
+                "Text (short)": shorten_text(text, max_words=6),
+                "Ground truth": gt,
+#            "Prediction": pred,
+ #           "Confidence": f"{conf:.2%}",
+  #          "Match": is_match,
+            })
+
         df = pd.DataFrame(print_rows)
         st.dataframe(df, use_container_width=True, hide_index=True)
 
